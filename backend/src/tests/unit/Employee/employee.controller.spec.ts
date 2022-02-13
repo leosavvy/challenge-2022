@@ -27,7 +27,7 @@ describe('EmployeeController', () => {
         controller = module.get<EmployeeController>(EmployeeController);
     });
 
-    it('requesting by id should return an object matching by id children', async () => {
+    it('should return all existent employees', async () => {
         employeeServiceMock.getAllEmployees.mockImplementation(() => {
             return employeeMock;
         });
@@ -74,14 +74,14 @@ describe('EmployeeController', () => {
                 });
             });
 
-            const childrenById = await controller.getAllEmployees();
-            expect(childrenById).toBeInstanceOf(HttpException);
+            const allEmployees = await controller.getAllEmployees();
+            expect(allEmployees).toBeInstanceOf(HttpException);
 
-            const childrenByClassroomId = await controller.createEmployee({
+            const createdEmployee = await controller.createEmployee({
                 department: 'IT',
                 salary: 3000,
             });
-            expect(childrenByClassroomId).toBeInstanceOf(HttpException);
+            expect(createdEmployee).toBeInstanceOf(HttpException);
         });
     });
 });
