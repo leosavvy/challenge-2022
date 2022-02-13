@@ -12,6 +12,6 @@ datasource db {
 
 model Employee {
   employeeId String @id @default(uuid())
-  department String @unique
+  department String
   salary     Int
 }

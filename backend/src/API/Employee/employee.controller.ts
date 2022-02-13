@@ -1,4 +1,11 @@
-import { Body, Controller, Get, HttpException, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    HttpException,
+    Logger,
+    Post,
+} from '@nestjs/common';
 import { errorHandler } from '../util/error-handler';
 import { EmployeeDAO } from 'src/Domain/Employee/DAOs/employee';
 import { EmployeeService } from 'src/Domain/Employee/employee.service';
@@ -21,7 +28,7 @@ export class EmployeeController {
         }
     }
 
-    @Post('/')
+    @Post('/create')
     async createEmployee(
         @Body() body: CreateEmployeeDTO,
     ): Promise<EmployeeDAO | HttpException> {

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { EmployeeDAO } from './DAOs/employee';
 import { CreateEmployeeDTO } from './DTOs/create';
 import { IEmployeeRepository } from './i-employee.repository';

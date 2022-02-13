@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { IStatisticRepository } from 'src/Domain/Statistic/i-statistic.repository';
 import { PrismaService } from 'src/Utils/Services/Prisma/prisma.service';
 
@@ -8,7 +8,8 @@ export class StatisticRepository implements IStatisticRepository {
 
     // Must be any since the result schema is dynamic
     async getStatisticByDepartment(): Promise<any> {
-        return await this.prisma.employee.groupBy({
+        const result2 = await this.prisma.employee.findMany();
+        const result = await this.prisma.employee.groupBy({
             by: ['department'],
             _avg: {
                 salary: true,
@@ -20,5 +21,7 @@ export class StatisticRepository implements IStatisticRepository {
                 salary: true,
             },
         });
+
+        return result;
     }
 }

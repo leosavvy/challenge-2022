@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { StatisticDAO } from './DAOs/statistic.dao';
 import { IStatisticRepository } from './i-statistic.repository';
 

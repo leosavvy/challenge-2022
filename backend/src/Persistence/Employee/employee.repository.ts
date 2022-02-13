@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Employee } from '@prisma/client';
 import { CreateEmployeeDTO } from 'src/Domain/Employee/DTOs/create';
 import { IEmployeeRepository } from 'src/Domain/Employee/i-employee.repository';

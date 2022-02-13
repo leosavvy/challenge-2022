@@ -1,8 +1,8 @@
 export enum Departments {
-    'IT',
-    'Marketing',
-    'CX',
-    'Support',
+    IT = 'IT',
+    Marketing = 'Marketing',
+    CX = 'CX',
+    Support = 'Support',
 }
 
 export const DEPARTMENTS_COUNT = Object.keys(Departments).length / 2;
