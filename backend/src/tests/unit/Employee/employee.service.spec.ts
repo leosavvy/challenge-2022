@@ -3,7 +3,7 @@ import { EmployeeService } from 'src/Domain/Employee/employee.service';
 import { employeeMock } from 'src/tests/Mocks/Employee/employee.mock';
 import { EmployeeRepositoryMock } from 'src/tests/Mocks/Employee/employee.repository.mock';
 
-describe('ChildService', () => {
+describe('EmployeeService', () => {
     let employeeRepositoryMock;
     let employeeService: EmployeeService;
 
