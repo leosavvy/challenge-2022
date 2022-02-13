@@ -43,8 +43,8 @@ describe('StatisticController', () => {
                 });
             });
 
-            const childrenById = await controller.getAllStatistics();
-            expect(childrenById).toBeInstanceOf(HttpException);
+            const allStatistics = await controller.getAllStatistics();
+            expect(allStatistics).toBeInstanceOf(HttpException);
         });
     });
 });

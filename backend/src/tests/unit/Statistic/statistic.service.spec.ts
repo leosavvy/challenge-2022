@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { StatisticService } from 'src/Domain/Statistic/statistic.service';
 import { StatisticRepositoryMock } from 'src/tests/Mocks/Statistic/statistic.repository.mock';
 
-describe('ChildService', () => {
+describe('StatisticService', () => {
     let statisticRepositoryMock;
     let statisticService: StatisticService;
 
