@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { employeeMock } from 'src/tests/Mocks/employee.mock';
+import { employeeMock } from 'src/tests/Mocks/Employee/employee.mock';
 import { PrismaService } from 'src/Utils/Services/Prisma/prisma.service';
-import { Employee } from '@prisma/client';
 import { PrismaServiceMock } from 'src/tests/Util/prisma-service';
 import { ServicesModule } from 'src/Utils/Services/services.module';
 import { EmployeeRepositoryModule } from 'src/Persistence/Employee/employee.repository.module';
 import { EmployeeRepository } from 'src/Persistence/Employee/employee.repository';
+import { v4 as uuidv4 } from 'uuid';
+import { CreateEmployeeDTO } from 'src/Domain/Employee/DTOs/create';
 
 describe('EmployeeRepository', () => {
     let prismaServiceMock;
@@ -30,10 +31,35 @@ describe('EmployeeRepository', () => {
             return employeeMock;
         });
 
-        const employees: Array<Employee> =
-            await employeeRepository.getAllEmployees();
+        const employees = await employeeRepository.getAll();
 
-        expect(Object.keys(employees[0])).toContain('employeeId');
-        expect(employees.length).toBeGreaterThan(0);
+        expect(Array.isArray(employees)).toBe(true);
+        expect(employees[0].department).toBeDefined();
+    });
+
+    it('should create an employee record', async () => {
+        const previousLength = employeeMock.length;
+        const createEmployeeDTO: CreateEmployeeDTO = {
+            department: 'IT',
+            salary: 3000,
+        };
+
+        prismaServiceMock.employee.create.mockImplementation((args) => {
+            employeeMock.push({
+                department: args['data']['department'],
+                employeeId: uuidv4(),
+                salary: args['data']['salary'],
+            });
+            return employeeMock[employeeMock.length - 1];
+        });
+
+        const createdEmployee = await employeeRepository.create(
+            createEmployeeDTO,
+        );
+
+        expect(employeeMock.length).toBe(previousLength + 1);
+        expect(createdEmployee.department).toBe(createEmployeeDTO.department);
+        expect(createdEmployee.salary).toBe(createEmployeeDTO.salary);
+        expect(createdEmployee.employeeId).toBeDefined();
     });
 });

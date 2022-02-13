@@ -1,5 +1,7 @@
-import { Employee } from '@prisma/client';
+import { EmployeeDAO } from './DAOs/employee';
+import { CreateEmployeeDTO } from './DTOs/create';
 
 export interface IEmployeeRepository {
-    getAllEmployees(): Promise<Array<Employee>>;
+    getAll(): Promise<Array<EmployeeDAO>>;
+    create(createEmployeeDTO: CreateEmployeeDTO): Promise<EmployeeDAO>;
 }

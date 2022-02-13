@@ -1,13 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { employeeMock } from 'src/tests/Mocks/Employee/employee.mock';
-import { EmployeeRepositoryMock } from 'src/tests/Mocks/Employee/employee.repository.mock';
+import { StatisticService } from 'src/Domain/Statistic/statistic.service';
+import { StatisticRepositoryMock } from 'src/tests/Mocks/Statistic/statistic.repository.mock';
 
 describe('ChildService', () => {
-    let employeeRepositoryMock;
+    let statisticRepositoryMock;
     let statisticService: StatisticService;
 
     beforeEach(async () => {
-        employeeRepositoryMock = EmployeeRepositoryMock();
+        statisticRepositoryMock = StatisticRepositoryMock();
 
         const module: TestingModule = await Test.createTestingModule({
             imports: [],
@@ -15,8 +15,8 @@ describe('ChildService', () => {
             providers: [
                 StatisticService,
                 {
-                    provide: 'EmployeeRepository',
-                    useValue: employeeRepositoryMock,
+                    provide: 'StatisticRepository',
+                    useValue: statisticRepositoryMock,
                 },
             ],
         }).compile();
@@ -24,14 +24,45 @@ describe('ChildService', () => {
         statisticService = module.get<StatisticService>(StatisticService);
     });
 
-    it('should return an object matching by id children', async () => {
-        employeeRepositoryMock.getAll.mockImplementation(() => {
-            return employeeMock;
-        });
+    it('should return the statistics by department', async () => {
+        statisticRepositoryMock.getStatisticByDepartment.mockImplementation(
+            () => {
+                return [
+                    {
+                        department: 'It',
+                        _min: 1000,
+                        _max: 5000,
+                        _avg: 3000,
+                    },
+                    {
+                        department: 'Marketing',
+                        _min: 1000,
+                        _max: 5000,
+                        _avg: 3000,
+                    },
+                ];
+            },
+        );
 
-        // TODO -> Statistic Service
-        const statistics = await statisticService.getStatistics();
+        const statistics = await statisticService.getStatisticByDepartment();
 
-        // TODO -> Assertions
+        expect(statistics).not.toBe(null);
+        expect(Array.isArray(statistics)).toBe(true);
+        expect(
+            statistics[0].department &&
+                typeof statistics[0].department === 'string',
+        ).toBe(true);
+        expect(
+            statistics[0].minSalary &&
+                typeof statistics[0].minSalary === 'number',
+        ).toBe(true);
+        expect(
+            statistics[0].maxSalary &&
+                typeof statistics[0].maxSalary === 'number',
+        ).toBe(true);
+        expect(
+            statistics[0].avgSalary &&
+                typeof statistics[0].avgSalary === 'number',
+        ).toBe(true);
     });
 });
