@@ -4,7 +4,8 @@ import {
     DEPARTMENTS_COUNT,
     MAX_SALARY,
     MIN_SALARY,
-} from 'Utils/constants';
+} from '../../Utils/constants';
+
 import { v4 as uuidv4 } from 'uuid';
 
 export const employeeMock: Array<Employee> = [

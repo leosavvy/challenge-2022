@@ -4,7 +4,7 @@ import {
     DEPARTMENTS_COUNT,
     MAX_SALARY,
     MIN_SALARY,
-} from 'Utils/constants';
+} from 'src/Utils/constants';
 import { v4 as uuidv4 } from 'uuid';
 
 const employees: Array<Employee> = [
