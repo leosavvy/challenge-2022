@@ -28,7 +28,7 @@ export class EmployeeController {
         }
     }
 
-    @Post('/create')
+    @Post('/')
     async createEmployee(
         @Body() body: CreateEmployeeDTO,
     ): Promise<EmployeeDAO | HttpException> {
