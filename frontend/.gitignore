@@ -1,0 +1,19 @@
+# npm
+node_modules
+# next.js build files
+.next
+# environment variables
+.env
+.env.*
+!.env.example
+
+# Terraform files
+.terraform
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+coverage
+
+# VSC
+.vscode
