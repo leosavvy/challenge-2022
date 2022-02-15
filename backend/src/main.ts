@@ -8,5 +8,6 @@ async function bootstrap() {
         new ValidationPipe({ whitelist: true, transform: true }),
     );
     await app.listen(8000);
+    Logger.log('Listening port 8000', 'APP');
 }
 bootstrap();
